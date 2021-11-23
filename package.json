@@ -1,0 +1,23 @@
+{
+  "name": "phototherapy-session-log-app",
+  "version": "1.0.0",
+  "description": "App to store Home phototherapy sessions along with photos and notes",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anayafj/phototherapy-session-log-app.git"
+  },
+  "author": "Francisco J Anaya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anayafj/phototherapy-session-log-app/issues"
+  },
+  "homepage": "https://github.com/anayafj/phototherapy-session-log-app#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
