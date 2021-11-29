@@ -3,10 +3,18 @@ body {
 	width: 100%;
 	height: 100vh;
 	font-size: 18px;
-	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	font-family: $default-family-font;
 	margin: 0;
 	padding: 0;
 	color: #000;
 	background-color: #f1f1f1;
 	overflow: hidden;
+
+	.wrapper {
+		background-color: #fff;
+		width: 100%;
+		max-width: $laptop_width;
+		margin-left: auto;
+		margin-right: auto;
+	}
 }

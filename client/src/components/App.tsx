@@ -4,11 +4,7 @@ import Header from './Header/Header';
 
 function App() {
 	return (
-		<div className="App">
-			<header className="App-header">
-				<h1>REACT HOME</h1>
-				<p>the Frontend</p>
-			</header>
+		<div className="wrapper">
 			<Header />
 			<Dashboard />
 		</div>
