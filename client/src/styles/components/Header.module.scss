@@ -12,11 +12,21 @@
 	.controls {
 		display: flex;
 		flex-direction: column;
-		// align-items: center;
+		width: 30%;
+		align-items: center;
 
 		.loginBtn {
 			// border: green 4px solid;
-			width: 60%;
+			width: 80%;
+
+			&.onLogin {
+				width: 40%;
+			}
+		}
+
+		&.onLogin {
+			justify-content: flex-end;
+			// align-items: unset;
 		}
 	}
 }

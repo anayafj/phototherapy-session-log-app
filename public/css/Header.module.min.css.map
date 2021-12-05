@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,OAAO,AAAC,CACP,OAAO,CAAE,IAAI,CACb,eAAe,CAAE,aAAa,CAC9B,WAAW,CAAE,MAAM,CACnB,gBAAgB,CAAE,IAAI,CACtB,UAAU,CAAE,KAAK,CAiBjB,AAtBD,AAOC,OAPM,CAON,KAAK,AAAC,CACL,SAAS,CAAE,IAAI,CACf,AATF,AAWC,OAXM,CAWN,SAAS,AAAC,CACT,OAAO,CAAE,IAAI,CACb,cAAc,CAAE,MAAM,CACtB,KAAK,CAAE,GAAG,CAOV,AArBF,AAiBE,OAjBK,CAWN,SAAS,CAMR,SAAS,AAAC,CAET,KAAK,CAAE,GAAG,CACV",
+    "sources": [
+        "../../client/src/styles/components/Header.module.scss"
+    ],
+    "names": [],
+    "file": "Header.module.min.css"
+}
