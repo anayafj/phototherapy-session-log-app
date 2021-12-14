@@ -11,6 +11,7 @@ require('./services/passport');
 mongoose.connect(keys.mongoURI);
 
 const app = express();
+app.use(bodyParser.json());
 const port = process.env.port || 5000;
 
 app.use(
@@ -22,10 +23,9 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.get('/', (req, res) => {
-	res.send('Hello World!');
-});
+// app.get('/', (req, res) => {
+// 	res.send('Hello World!');
+// });
 
 require('./routes/authRoutes')(app);
 

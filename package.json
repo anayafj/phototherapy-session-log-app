@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/index.js",
-    "dev": "nodemon server/index.js"
+    "server": "nodemon server/index.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,7 @@
   "homepage": "https://github.com/anayafj/phototherapy-session-log-app#readme",
   "dependencies": {
     "body-parse": "^0.1.0",
+    "concurrently": "^6.4.0",
     "cookie-session": "^1.4.0",
     "express": "^4.17.1",
     "mongoose": "^6.0.14",

@@ -24,10 +24,23 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 40%;
+  width: 30%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .header .controls .loginBtn {
-  width: 60%;
+  width: 80%;
+}
+
+.header .controls .loginBtn.onLogin {
+  width: 40%;
+}
+
+.header .controls.onLogin {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 /*# sourceMappingURL=Header.module.css.map */
