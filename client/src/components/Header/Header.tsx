@@ -1,11 +1,9 @@
 import styles from '../../styles/components/Header.module.scss';
 import classnames  from 'classnames';
-import { useState, useEffect } from 'react';
+import { useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 
-// import { AuthenticationState } from '../../actions/types';
-import { useAppSelector, useAppDispatch } from '../../hooks';
-// import { LogUserOut } from '../../actions';
+import { useAppSelector } from '../../hooks';
 import Navigation from './Navigation';
 
 enum LoginButtonText {IN = 'Log Out', OUT = 'Log In'};
@@ -17,13 +15,11 @@ type ButtonIcon = LoginButtonIconText;
 type ButtonPath = LoginButtonPaths | string;
 
 // THINGS TO DO
-// 1. Work on login credentials (email/password, google).
 // 2. Get links working.
 
 const Header = () => {
     /// Redux Hooks --------------------------------------
     const auth = useAppSelector(state => state.auth['auth']);
-    // const dispatch = useAppDispatch();
 
     // States
     const [loginBtnToggle, setLoginBtnToggle] = useState<boolean | null>(null);
@@ -35,37 +31,17 @@ const Header = () => {
     
     const loginButtonClickPath: ButtonPath = loginStatus ? LoginButtonPaths.IN : LoginButtonPaths.OUT;
 
-    //Login button handler
-    // const loginButtonClicked = () => {
-    //     // e.preventDefault();
-    //     console.log("LoginButtonClicked -- loginStatus = ", loginStatus);
-    //     console.log("LoginButtonClicked -- loginBtnToggle = ", loginBtnToggle);
-    //     // if(loginStatus) dispatch(LogUserOut());
-    //     // setBtnToggle(!btnToggle);
-    //     // setLoginMode();
-
-    //     switch(loginStatus){
-    //         case null:
-    //             console.log("BTN - null");
-    //             break;
-    //         case false:
-    //             console.log("BTN - false");
-                
-    //         break;
-    //         default:
-    //             console.log("BTN - default");
-                
-    //     }
-    // }
-
     // React Hooks -----------------------------
     useEffect(() => {
-        setLoginStatus(auth.authenticated);
+        let loggedIn: boolean = auth.authenticated ? true: false;
+        console.log("auth.authenticated = ", auth.authenticated);
+        console.log("loggedIn = ",loggedIn);
+        setLoginStatus(loggedIn);
     }, [auth.authenticated]);
 
     useEffect(() => {
         setLoginBtnToggle(loginStatus);
-    }, [loginStatus])
+    }, [loginStatus]);
 
 
     // Styles ------------------------------>
@@ -83,18 +59,21 @@ const Header = () => {
         `${loginStatus ? styles.onLogin : ''}`,
         );
 
-    // <----------------------------- Styles//    
-
-
+    // Helper functions ------------------------>>
+    const manualRefresh = () => {
+        setTimeout(() => {
+            window.location.reload();
+        }, 100);
+    };
 
 	return (
         <header className={styles.header}>
             <div className={styles.logo}>LOGO</div>
             <div className={controlClasses}>
             <Link
-                to= '/auth/google' //{loginButtonClickPath}
+                onClick={manualRefresh}
+                to={loginButtonClickPath}
                 className={toggleButton}
-                // onClick={() => loginButtonClicked()}
             >
                 <i className={`${loginButtonIcon} icon`}></i>
                 <span>{loginBtnText}</span>
