@@ -43,4 +43,12 @@
       -ms-flex-pack: end;
           justify-content: flex-end;
 }
+
+.header .patient-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  background-color: lightcoral;
+}
 /*# sourceMappingURL=Header.module.css.map */

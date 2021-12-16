@@ -70,7 +70,15 @@ const Header = () => {
     let controlClasses:string = classnames(
         styles.controls,
         `${loginStatus ? styles.onLogin : ''}`,
-        );
+    );
+
+    let addPatientButton: string = classnames (
+        'ui basic button mini', styles.new
+    );  
+        
+    let changePatientButton: string = classnames (
+        'circular ui icon button mini', styles.change
+    );
 
     // Helper functions ------------------------>>
     const manualRefresh = () => {
@@ -79,22 +87,50 @@ const Header = () => {
         }, 10);
     };    
 
+    //patient
+    const patient: string = "Elise Anaya";
+
+    const changePatient = () => {
+        console.log("Change patient");
+    }
+
+    const newPatient = () => {
+        console.log("New patient");
+    }
 	return (
         <header className={styles.header}>
-            <div className={styles.logo}>LOGO</div>
-            <div className={controlClasses}>
-
-            <Link
-                to={loginButtonClickPath}
-                onClick={manualRefresh}
-                className={toggleButton}
-            >
-                <i className={`${loginButtonIcon} icon`}></i>
-                <span>{loginBtnText}</span>
-            </Link> 
-			    <Navigation ContainerClass={`${loginStatus ? '' : 'hide'}`}/>
+            <div className={styles.topContainer}>
+                <div className={styles.logo}>Vitiligo Phototherapy Log</div>
+                <div className={controlClasses}>
+                    <Link
+                        to={loginButtonClickPath}
+                        onClick={manualRefresh}
+                        className={toggleButton}
+                    >
+                    <i className={`${loginButtonIcon} icon`}></i>
+                    <span>{loginBtnText}</span>
+                    </Link> 
+                    <Navigation ContainerClass={`${loginStatus ? '' : 'hide'}`}/>
+                </div>
             </div>
-		
+            <div className={styles.patientBar}>
+                <h2>{patient}</h2>
+                <Link
+                    to='/patient/change'
+                    onClick={changePatient}
+                    className={changePatientButton}
+                >
+                    <i className="users icon"></i>
+                </Link>
+                <Link
+                    to='/patient/create-new'
+                    onClick={newPatient}
+                    className={addPatientButton}
+                >
+                    <i className="icon user"></i>
+                    New Patient
+                </Link>
+            </div>	
          </header>
 	);
 }

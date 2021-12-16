@@ -8,22 +8,43 @@ interface NavProps {
 }
 
 const Navigation: React.FC<NavProps> = ({ ContainerClass }) => {
-	let btnsClass = classnames('ui basic buttons', styles.centerBtns);
+	
+	// Styles ------------------------------->>> 
+	let btnsClass = classnames('ui buttons', styles.centerBtns);
 
-	// var for Login button classes
     let navContainerClass:string = classnames(
 		ContainerClass,
 		styles.nav,
 	);
 
+	let sessionsButton:string = classnames(
+		"ui tiny button"
+	);
+
+	let notesButton:string = classnames(
+		"ui tiny button"
+	);
+
+	let photosButton:string = classnames(
+		"ui tiny button"
+	);
+
 	return (
 		<nav className={navContainerClass}>
 			<div className={btnsClass}>
-  				<Link to='/dashboard' className="ui small button">Sessions</Link>
-  				<Link to='/notes'className="ui small button">Notes</Link>
-  				<Link to='/dashboard' className="ui small button">Photos</Link>
+  				<Link to='/dashboard' className={sessionsButton}>
+				  <i className="list alternate outline icon"></i>
+					  Sessions
+				</Link>
+  				<Link to='/notes'className={notesButton}>
+				  	<i className="sticky note outline icon"></i>
+					  Notes
+				</Link>
+  				<Link to='/dashboard' className={photosButton}>
+				  <i className="image outline icon"></i>
+					  Photos
+				</Link>
 			</div>
-			<button className="fluid ui green small button">New Session</button>
 		</nav>
 	);
 }

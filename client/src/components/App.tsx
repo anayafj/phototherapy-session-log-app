@@ -6,7 +6,9 @@ import { fetchUser } from '../actions';
 
 import Landing from './Landing';
 import Dashboard from './Dashboard';
+import Sessions from './Sessions';
 import Notes from './Notes';
+import Photos from './Photos';
 import Header from './Header/Header';
 
 function App () {
@@ -27,7 +29,9 @@ function App () {
 				<Routes>
 					<Route path="/" element={<Landing />} />
 					<Route path="/homebase" element={<Dashboard />} />
-					<Route path="/notepad" element={<Notes />} />
+					<Route path="/sessions/:id" element={<Sessions />} />
+					<Route path="/notepad/:id" element={<Notes />} />
+					<Route path="/gallery/:id" element={<Photos />} />
 				</Routes>
 			</div>
 		</Router>
