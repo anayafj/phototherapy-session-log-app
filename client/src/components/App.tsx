@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
-import { useAppDispatch} from '../hooks';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { fetchUser } from '../actions';
 
 import Landing from './Landing';
@@ -10,7 +10,11 @@ import Notes from './Notes';
 import Header from './Header/Header';
 
 function App () {
+	/// Redux Hooks --------------------------------------
+    const auth = useAppSelector(state => state.auth['auth']);
 	const dispatch = useAppDispatch();
+
+	console.log(auth);
 
 	useEffect(() => {
 	  dispatch(fetchUser());

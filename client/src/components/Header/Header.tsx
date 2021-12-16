@@ -1,7 +1,8 @@
 import styles from '../../styles/components/Header.module.scss';
 import classnames  from 'classnames';
 import { useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 import { useAppSelector } from '../../hooks';
 import Navigation from './Navigation';
@@ -21,6 +22,8 @@ const Header = () => {
     /// Redux Hooks --------------------------------------
     const auth = useAppSelector(state => state.auth['auth']);
 
+    const navigate = useNavigate();
+
     // States
     const [loginBtnToggle, setLoginBtnToggle] = useState<boolean | null>(null);
     const [loginStatus, setLoginStatus] = useState<boolean | null>(null);
@@ -34,14 +37,24 @@ const Header = () => {
     // React Hooks -----------------------------
     useEffect(() => {
         let loggedIn: boolean = auth.authenticated ? true: false;
-        console.log("auth.authenticated = ", auth.authenticated);
-        console.log("loggedIn = ",loggedIn);
         setLoginStatus(loggedIn);
     }, [auth.authenticated]);
 
     useEffect(() => {
         setLoginBtnToggle(loginStatus);
     }, [loginStatus]);
+
+    useEffect(() => {
+		if(loginStatus){
+			console.log("loginStatus = ",loginStatus);
+			setDashboardOnRefresh();
+		}
+	},[loginStatus]);
+
+    const setDashboardOnRefresh = () =>{
+        navigate('/homebase');
+    }
+    // if(loginStatus)setDashboardOnRefresh();
 
 
     // Styles ------------------------------>
@@ -63,21 +76,22 @@ const Header = () => {
     const manualRefresh = () => {
         setTimeout(() => {
             window.location.reload();
-        }, 100);
-    };
+        }, 10);
+    };    
 
 	return (
         <header className={styles.header}>
             <div className={styles.logo}>LOGO</div>
             <div className={controlClasses}>
+
             <Link
-                onClick={manualRefresh}
                 to={loginButtonClickPath}
+                onClick={manualRefresh}
                 className={toggleButton}
             >
                 <i className={`${loginButtonIcon} icon`}></i>
                 <span>{loginBtnText}</span>
-            </Link>
+            </Link> 
 			    <Navigation ContainerClass={`${loginStatus ? '' : 'hide'}`}/>
             </div>
 		
