@@ -8,16 +8,19 @@
 
 		.logo {
 			font-size: 2rem;
+			margin-left: 10px;
 		}
 
 		.controls {
 			display: flex;
 			flex-direction: column;
 			width: 30%;
-			align-items: center;
+			align-items: flex-end;
+			margin-top: 6px;
 
 			.loginBtn {
 				width: 80%;
+				margin: 0 6px 6px 0 !important;
 
 				&.onLogin {
 					width: 40%;
@@ -25,31 +28,9 @@
 			}
 
 			&.onLogin {
+				margin-right: 0 !important;
 				justify-content: flex-end;
 			}
-		}
-	}
-
-	.patientBar {
-		display: flex;
-		align-items: center;
-		width: 100%;
-		background-color: rgb(128, 223, 240);
-
-		h2 {
-			font-size: 1rem;
-			letter-spacing: 1px;
-			margin: 5px 10px;
-		}
-
-		.change {
-			background-color: lightcyan !important;
-			margin: 6px;
-		}
-
-		.new {
-			background-color: lightcyan !important;
-			margin: 6px;
 		}
 	}
 }

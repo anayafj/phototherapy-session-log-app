@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import styles from '../../styles/components/Navigation.module.scss';
 import classnames  from 'classnames';
 
@@ -11,11 +11,6 @@ const Navigation: React.FC<NavProps> = ({ ContainerClass }) => {
 	
 	// Styles ------------------------------->>> 
 	let btnsClass = classnames('ui buttons', styles.centerBtns);
-
-    let navContainerClass:string = classnames(
-		ContainerClass,
-		styles.nav,
-	);
 
 	let sessionsButton:string = classnames(
 		"ui tiny button"
@@ -30,17 +25,17 @@ const Navigation: React.FC<NavProps> = ({ ContainerClass }) => {
 	);
 
 	return (
-		<nav className={navContainerClass}>
+		<nav className={ContainerClass}>
 			<div className={btnsClass}>
-  				<Link to='/dashboard' className={sessionsButton}>
+  				<Link to='/sessions' className={sessionsButton}>
 				  <i className="list alternate outline icon"></i>
 					  Sessions
 				</Link>
-  				<Link to='/notes'className={notesButton}>
+  				<Link to='/notepad' className={notesButton}>
 				  	<i className="sticky note outline icon"></i>
 					  Notes
 				</Link>
-  				<Link to='/dashboard' className={photosButton}>
+  				<Link to='/gallery' className={photosButton}>
 				  <i className="image outline icon"></i>
 					  Photos
 				</Link>

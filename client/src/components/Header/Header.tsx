@@ -1,11 +1,11 @@
 import styles from '../../styles/components/Header.module.scss';
 import classnames  from 'classnames';
 import { useState, useEffect} from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-
+import { Link, useNavigate} from 'react-router-dom';
 
 import { useAppSelector } from '../../hooks';
 import Navigation from './Navigation';
+import Patient from './Patient';
 
 enum LoginButtonText {IN = 'Log Out', OUT = 'Log In'};
 enum LoginButtonIconText {IN = 'sign-out', OUT = 'sign-in'};
@@ -15,14 +15,11 @@ type ButtonText = LoginButtonText;
 type ButtonIcon = LoginButtonIconText;
 type ButtonPath = LoginButtonPaths | string;
 
-// THINGS TO DO
-// 2. Get links working.
-
 const Header = () => {
+    let currentLocationPath: string = window.location.pathname;
+    
     /// Redux Hooks --------------------------------------
-    const auth = useAppSelector(state => state.auth['auth']);
-
-    const navigate = useNavigate();
+    const auth = useAppSelector(state => state.therapy['auth']);
 
     // States
     const [loginBtnToggle, setLoginBtnToggle] = useState<boolean | null>(null);
@@ -35,6 +32,10 @@ const Header = () => {
     const loginButtonClickPath: ButtonPath = loginStatus ? LoginButtonPaths.IN : LoginButtonPaths.OUT;
 
     // React Hooks -----------------------------
+
+    // programatic navigation hook
+    const navigate = useNavigate();
+
     useEffect(() => {
         let loggedIn: boolean = auth.authenticated ? true: false;
         setLoginStatus(loggedIn);
@@ -45,26 +46,20 @@ const Header = () => {
     }, [loginStatus]);
 
     useEffect(() => {
-		if(loginStatus){
-			console.log("loginStatus = ",loginStatus);
-			setDashboardOnRefresh();
+		if(loginStatus && currentLocationPath === "/"){
+			navigate('/homebase');
 		}
-	},[loginStatus]);
-
-    const setDashboardOnRefresh = () =>{
-        navigate('/homebase');
-    }
-    // if(loginStatus)setDashboardOnRefresh();
+	},[loginStatus, currentLocationPath, navigate]);
 
 
     // Styles ------------------------------>
-     // var for Login button classes
+
      let toggleButton:string = classnames(
         'ui small button',
         `${styles.loginBtn}`,
         `${loginStatus ? styles.onLogin : ''}`,
         {'orange': !loginBtnToggle}, 
-        {'white basic': loginBtnToggle}
+        {'negative': loginBtnToggle}
         );
 
     let controlClasses:string = classnames(
@@ -72,39 +67,14 @@ const Header = () => {
         `${loginStatus ? styles.onLogin : ''}`,
     );
 
-    let addPatientButton: string = classnames (
-        'ui basic button mini', styles.new
-    );  
-        
-    let changePatientButton: string = classnames (
-        'circular ui icon button mini', styles.change
-    );
-
-    // Helper functions ------------------------>>
-    const manualRefresh = () => {
-        setTimeout(() => {
-            window.location.reload();
-        }, 10);
-    };    
-
-    //patient
-    const patient: string = "Elise Anaya";
-
-    const changePatient = () => {
-        console.log("Change patient");
-    }
-
-    const newPatient = () => {
-        console.log("New patient");
-    }
 	return (
         <header className={styles.header}>
             <div className={styles.topContainer}>
                 <div className={styles.logo}>Vitiligo Phototherapy Log</div>
                 <div className={controlClasses}>
                     <Link
+                        reloadDocument
                         to={loginButtonClickPath}
-                        onClick={manualRefresh}
                         className={toggleButton}
                     >
                     <i className={`${loginButtonIcon} icon`}></i>
@@ -113,24 +83,7 @@ const Header = () => {
                     <Navigation ContainerClass={`${loginStatus ? '' : 'hide'}`}/>
                 </div>
             </div>
-            <div className={styles.patientBar}>
-                <h2>{patient}</h2>
-                <Link
-                    to='/patient/change'
-                    onClick={changePatient}
-                    className={changePatientButton}
-                >
-                    <i className="users icon"></i>
-                </Link>
-                <Link
-                    to='/patient/create-new'
-                    onClick={newPatient}
-                    className={addPatientButton}
-                >
-                    <i className="icon user"></i>
-                    New Patient
-                </Link>
-            </div>	
+                <Patient PatientContainer={loginStatus} />
          </header>
 	);
 }

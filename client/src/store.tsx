@@ -4,7 +4,7 @@ import reducers from './reducers';
 
 const store = configureStore({
     reducer: {
-        auth: reducers,
+        therapy: reducers,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     .prepend(

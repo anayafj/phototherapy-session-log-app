@@ -3,6 +3,7 @@ const Patients = require('../models/Patients');
 const router = express.Router();
 
 router.get('/patients', async (req, res) => {
+	console.log('patient routes - req = ', req);
 	const patients = await Patients.find();
 	res.send(patients);
 });

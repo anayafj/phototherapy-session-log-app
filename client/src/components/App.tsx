@@ -13,7 +13,7 @@ import Header from './Header/Header';
 
 function App () {
 	/// Redux Hooks --------------------------------------
-    const auth = useAppSelector(state => state.auth['auth']);
+    const auth = useAppSelector(state => state.therapy['auth']);
 	const dispatch = useAppDispatch();
 
 	console.log(auth);
@@ -29,9 +29,9 @@ function App () {
 				<Routes>
 					<Route path="/" element={<Landing />} />
 					<Route path="/homebase" element={<Dashboard />} />
-					<Route path="/sessions/:id" element={<Sessions />} />
-					<Route path="/notepad/:id" element={<Notes />} />
-					<Route path="/gallery/:id" element={<Photos />} />
+					<Route path="/sessions" element={<Sessions />} />
+					<Route path="/notepad" element={<Notes />} />
+					<Route path="/gallery" element={<Photos />} />
 				</Routes>
 			</div>
 		</Router>

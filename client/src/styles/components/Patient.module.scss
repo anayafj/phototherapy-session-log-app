@@ -1,0 +1,29 @@
+.patientBar {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	background-color: rgb(128, 223, 240);
+
+	h2 {
+		font-size: 1rem;
+		letter-spacing: 1px;
+		margin: 5px 10px;
+	}
+
+	.changePatientBtn:any-link {
+		background: lightcyan none !important;
+		margin: 6px;
+	}
+
+	.addPatientBtn:any-link {
+		background: lightcyan none !important;
+		margin: 6px;
+	}
+}
+
+.defaultBar {
+	margin-left: 1%;
+	width: 98%;
+	background-color: rgb(128, 223, 240);
+	height: 2px;
+}
