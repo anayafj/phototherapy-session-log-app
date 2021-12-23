@@ -23,6 +23,11 @@ module.exports = (app) => {
 	});
 
 	app.get('/api/current_user', (req, res) => {
-		res.send(req.user);
+		console.log('CURRENT USER');
+		try {
+			res.send(req.user);
+		} catch (err) {
+			console.log('err = ', err);
+		}
 	});
 };

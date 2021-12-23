@@ -22,12 +22,11 @@ const Header = () => {
     const auth = useAppSelector(state => state.therapy['auth']);
 
     // States
-    const [loginBtnToggle, setLoginBtnToggle] = useState<boolean | null>(null);
     const [loginStatus, setLoginStatus] = useState<boolean | null>(null);
 
-    // Text variables. loginBtnToggle (true = Logged In, false = Loged out)
-    let loginBtnText:ButtonText = loginBtnToggle ? LoginButtonText.IN: LoginButtonText.OUT;
-    let loginButtonIcon:ButtonIcon = loginBtnToggle ? LoginButtonIconText.IN: LoginButtonIconText.OUT;
+    // Text variables
+    let loginBtnText:ButtonText = loginStatus ? LoginButtonText.IN: LoginButtonText.OUT;
+    let loginButtonIcon:ButtonIcon = loginStatus ? LoginButtonIconText.IN: LoginButtonIconText.OUT;
     
     const loginButtonClickPath: ButtonPath = loginStatus ? LoginButtonPaths.IN : LoginButtonPaths.OUT;
 
@@ -37,13 +36,8 @@ const Header = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        let loggedIn: boolean = auth.authenticated ? true: false;
-        setLoginStatus(loggedIn);
+        setLoginStatus(auth.authenticated);
     }, [auth.authenticated]);
-
-    useEffect(() => {
-        setLoginBtnToggle(loginStatus);
-    }, [loginStatus]);
 
     useEffect(() => {
 		if(loginStatus && currentLocationPath === "/"){
@@ -51,15 +45,14 @@ const Header = () => {
 		}
 	},[loginStatus, currentLocationPath, navigate]);
 
-
     // Styles ------------------------------>
 
      let toggleButton:string = classnames(
         'ui small button',
         `${styles.loginBtn}`,
         `${loginStatus ? styles.onLogin : ''}`,
-        {'orange': !loginBtnToggle}, 
-        {'negative': loginBtnToggle}
+        {'orange': !loginStatus}, 
+        {'negative': loginStatus}
         );
 
     let controlClasses:string = classnames(
@@ -83,7 +76,7 @@ const Header = () => {
                     <Navigation ContainerClass={`${loginStatus ? '' : 'hide'}`}/>
                 </div>
             </div>
-                <Patient PatientContainer={loginStatus} />
+            <Patient PatientContainer={loginStatus} />
          </header>
 	);
 }

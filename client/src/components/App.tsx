@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../hooks';
+import { useAppDispatch} from '../hooks';
 import { fetchUser } from '../actions';
 
 import Landing from './Landing';
@@ -13,14 +13,17 @@ import Header from './Header/Header';
 
 function App () {
 	/// Redux Hooks --------------------------------------
-    const auth = useAppSelector(state => state.therapy['auth']);
 	const dispatch = useAppDispatch();
 
-	console.log(auth);
+	console.log("HOME APP RERENDER");
 
 	useEffect(() => {
 	  dispatch(fetchUser());
-	},[dispatch]);
+	// fetchUser();
+	  return () => {
+		console.log('how high');
+	  }
+	},);
 
 	return (
 		<Router>

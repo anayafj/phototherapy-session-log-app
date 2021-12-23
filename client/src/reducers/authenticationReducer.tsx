@@ -1,6 +1,5 @@
 import {AuthenticationState, FETCH_USER, LOGOUT_USER, LOGIN_USER } from '../actions/types';
 import { AnyAction } from 'redux';
-// import _ from "lodash";
 
 const initialState: AuthenticationState = {
     authenticated : null,

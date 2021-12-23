@@ -3,57 +3,48 @@ import { Fragment , useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import classnames  from 'classnames';
 
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchPatient } from '../../actions';
+// import { useAppDispatch, useAppSelector } from '../../hooks';
+// import { fetchPatient } from '../../actions';
 
 interface NavProps {
     PatientContainer: boolean | null,
 }
 
+// THINGS TO DO ****************************
+    // 1. CHECK IF PATIENTS ARE AVAILABLE
+    // 2. IF PATIENT AVAILABLE, CHECK FOR LAST PATIENT USED FOR CURRENT USER
+    // 3. GET NEW PATIENT BUTTON WORKING TO CREATE NEW PATIENT
+
 const Patient: React.FC <NavProps>= ({ PatientContainer }) => {
     // Redux Hooks --------------------------------------
-    const patient = useAppSelector(state => state.therapy['patient']);
-	const dispatch = useAppDispatch();
-
-    console.log(" patient = ", patient);
-
-    useEffect(() => {
-        if(PatientContainer) dispatch(fetchPatient());
-    }, [dispatch, PatientContainer])
-
-    console.log("PatientContainer = ", PatientContainer);
-
+    // const patient = useAppSelector(state => state.therapy['patient']);
+	// const dispatch = useAppDispatch();
     let patientName: string = "Elise Anaya";
     let multiPatients: boolean = true;
 
-    const changePatient = () => {
-        console.log("Change patient");
-    }
+    // console.log(" patient = ", patient);
 
-    const newPatient = () => {
-        console.log("New patient");
-    }
+    // useEffect(() => {
+    //     if(PatientContainer) dispatch(fetchPatient());
+    // }, [dispatch, PatientContainer])
 
-    // Styles ------------------------------>
-    let patientContainerBar: string = classnames (
-        styles.patientBar , `${PatientContainer ? '' : 'hide'}`
-    );
+    console.log("PatientContainer = ", PatientContainer);
 
-    let addPatientButton: string = classnames (
-        styles.addPatientBtn, 'ui basic button mini'
-    );  
-        
-    let changePatientButton: string = classnames (
-        'circular ui icon basic button mini', styles.changePatientBtn
-    );
+    
 
-    // reloadDocument
+    // const changePatient = () => {
+    //     console.log("Change patient");
+    // }
 
-    return (
-        <Fragment>
-            <div className={`${PatientContainer ? 'hide' : styles.defaultBar}`}></div>
-            <div className={patientContainerBar}>
-                <h2>{patientName}</h2>
+    // const newPatient = () => {
+    //     console.log("New patient");
+    // }
+
+    const renderPatientBar = () => {
+        if(PatientContainer){
+            return (
+                <div className={styles.patientBar}>
+                    <h2>{patientName}</h2>
                     <Link
                         to='/patient/change'
                         className={`${multiPatients ? changePatientButton: 'hide'}`}
@@ -67,7 +58,25 @@ const Patient: React.FC <NavProps>= ({ PatientContainer }) => {
                         <i className="icon user"></i>
                         New Patient
                     </Link>
-            </div>	
+                </div>	
+            );
+        } else {
+            return <div className={styles.defaultBar}></div>;
+        } 
+    }
+
+    // Styles ------------------------------>
+    let addPatientButton: string = classnames (
+        styles.addPatientBtn, 'ui basic button mini'
+    );  
+        
+    let changePatientButton: string = classnames (
+        'circular ui icon basic button mini', styles.changePatientBtn
+    );
+
+    return (
+        <Fragment>
+            {renderPatientBar()}
         </Fragment>
     );
 }
