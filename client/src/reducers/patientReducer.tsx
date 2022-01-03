@@ -9,7 +9,8 @@ export const patientReducer = (state = initialState, action: AnyAction) => {
     console.log("patientReducer - state : ",state);
     switch (action.type){
         case FETCH_PATIENT:
-        return {...state, name: action.payload || false};
+        // return {...state, name: action.payload || false};
+        return state;
         default:
             return state;
 }

@@ -15,15 +15,9 @@ function App () {
 	/// Redux Hooks --------------------------------------
 	const dispatch = useAppDispatch();
 
-	console.log("HOME APP RERENDER");
-
 	useEffect(() => {
-	  dispatch(fetchUser());
-	// fetchUser();
-	  return () => {
-		console.log('how high');
-	  }
-	},);
+		dispatch(fetchUser());
+	}, [dispatch]);
 
 	return (
 		<Router>

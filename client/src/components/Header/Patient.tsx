@@ -1,35 +1,53 @@
 import styles from '../../styles/components/Patient.module.scss';
-import { Fragment , useEffect } from 'react';
+import { Fragment , useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import classnames  from 'classnames';
 
-// import { useAppDispatch, useAppSelector } from '../../hooks';
-// import { fetchPatient } from '../../actions';
+import { useAppDispatch, useAppSelector} from '../../hooks';
+import { fetchPatient } from '../../actions';
 
 interface NavProps {
     PatientContainer: boolean | null,
 }
 
 // THINGS TO DO ****************************
-    // 1. CHECK IF PATIENTS ARE AVAILABLE
+    // 1. CHECK IF PATIENTS ARE AVAILABLE for specific doctor
     // 2. IF PATIENT AVAILABLE, CHECK FOR LAST PATIENT USED FOR CURRENT USER
     // 3. GET NEW PATIENT BUTTON WORKING TO CREATE NEW PATIENT
 
 const Patient: React.FC <NavProps>= ({ PatientContainer }) => {
-    // Redux Hooks --------------------------------------
-    // const patient = useAppSelector(state => state.therapy['patient']);
-	// const dispatch = useAppDispatch();
     let patientName: string = "Elise Anaya";
     let multiPatients: boolean = true;
 
+    // Redux Hooks --------------------------------------
+    // const patient = useAppSelector(state => state.therapy['patient']);
+	const dispatch = useAppDispatch();
+
+    // States
+    const [doctorStatus, setDoctorStatus] = useState<boolean | null>(null);   
+
     // console.log(" patient = ", patient);
 
+    useEffect(() => {
+        setDoctorStatus(PatientContainer);
+    }, [PatientContainer])
+
     // useEffect(() => {
-    //     if(PatientContainer) dispatch(fetchPatient());
-    // }, [dispatch, PatientContainer])
+    //     if(doctorStatus){
+    //         dispatch(fetchPatient());
+    //     } 
+    // }, [dispatch, doctorStatus]);
 
-    console.log("PatientContainer = ", PatientContainer);
+    useEffect(() => {
+    if(PatientContainer) dispatch(fetchPatient());
+	}, [PatientContainer, dispatch]);
 
+    console.log("doctorStatus = ", doctorStatus);
+    // if(doctorStatus){
+        
+    //     console.log("doctorStatus googleId = ", doctorStatus.googleId);
+
+    // }
     
 
     // const changePatient = () => {
@@ -40,8 +58,20 @@ const Patient: React.FC <NavProps>= ({ PatientContainer }) => {
     //     console.log("New patient");
     // }
 
+    
+
+    // Styles ------------------------------>
+    let addPatientButton: string = classnames (
+        styles.addPatientBtn, 'ui basic button mini'
+    );  
+        
+    let changePatientButton: string = classnames (
+        'circular ui icon basic button mini', styles.changePatientBtn
+    );
+
+    // Render helper --------------------
     const renderPatientBar = () => {
-        if(PatientContainer){
+        if(doctorStatus){
             return (
                 <div className={styles.patientBar}>
                     <h2>{patientName}</h2>
@@ -64,15 +94,6 @@ const Patient: React.FC <NavProps>= ({ PatientContainer }) => {
             return <div className={styles.defaultBar}></div>;
         } 
     }
-
-    // Styles ------------------------------>
-    let addPatientButton: string = classnames (
-        styles.addPatientBtn, 'ui basic button mini'
-    );  
-        
-    let changePatientButton: string = classnames (
-        'circular ui icon basic button mini', styles.changePatientBtn
-    );
 
     return (
         <Fragment>

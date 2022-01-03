@@ -11,16 +11,21 @@ enum LoginButtonText {IN = 'Log Out', OUT = 'Log In'};
 enum LoginButtonIconText {IN = 'sign-out', OUT = 'sign-in'};
 enum LoginButtonPaths {IN = 'api/logout', OUT = 'auth/google'};
 
+enum RedirectPage {IN = 'homebase', OUT = ''};
+
 type ButtonText = LoginButtonText;
 type ButtonIcon = LoginButtonIconText;
 type ButtonPath = LoginButtonPaths | string;
 
 const Header = () => {
-    let currentLocationPath: string = window.location.pathname;
+    const currentLocationPath: string = window.location.pathname;
+
+    // programatic navigation hook
+    const navigate = useNavigate();
     
     /// Redux Hooks --------------------------------------
     const auth = useAppSelector(state => state.therapy['auth']);
-
+    
     // States
     const [loginStatus, setLoginStatus] = useState<boolean | null>(null);
 
@@ -31,18 +36,16 @@ const Header = () => {
     const loginButtonClickPath: ButtonPath = loginStatus ? LoginButtonPaths.IN : LoginButtonPaths.OUT;
 
     // React Hooks -----------------------------
-
-    // programatic navigation hook
-    const navigate = useNavigate();
-
     useEffect(() => {
-        setLoginStatus(auth.authenticated);
-    }, [auth.authenticated]);
+        setLoginStatus(auth.authenticated ? true : false)
+    }, [auth]);
 
-    useEffect(() => {
+    useEffect(() => {        
 		if(loginStatus && currentLocationPath === "/"){
-			navigate('/homebase');
-		}
+			navigate(RedirectPage.IN);
+		} else if (!loginStatus){
+            navigate(RedirectPage.OUT);
+        }
 	},[loginStatus, currentLocationPath, navigate]);
 
     // Styles ------------------------------>
@@ -65,13 +68,9 @@ const Header = () => {
             <div className={styles.topContainer}>
                 <div className={styles.logo}>Vitiligo Phototherapy Log</div>
                 <div className={controlClasses}>
-                    <Link
-                        reloadDocument
-                        to={loginButtonClickPath}
-                        className={toggleButton}
-                    >
-                    <i className={`${loginButtonIcon} icon`}></i>
-                    <span>{loginBtnText}</span>
+                    <Link  reloadDocument to={loginButtonClickPath} className={toggleButton}>
+                        <i className={`${loginButtonIcon} icon`}></i>
+                        <span>{loginBtnText}</span>
                     </Link> 
                     <Navigation ContainerClass={`${loginStatus ? '' : 'hide'}`}/>
                 </div>
