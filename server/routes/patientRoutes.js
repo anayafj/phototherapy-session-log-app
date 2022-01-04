@@ -5,6 +5,7 @@ const router = express.Router();
 router.get('/patients', async (req, res) => {
 	console.log('patient routes - req = ', req);
 	const patients = await Patients.find();
+	console.log('patient routes - after await  -  patients= ', patients);
 	res.send(patients);
 });
 

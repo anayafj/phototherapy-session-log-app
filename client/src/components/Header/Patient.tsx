@@ -20,7 +20,7 @@ const Patient: React.FC <NavProps>= ({ PatientContainer }) => {
     let multiPatients: boolean = true;
 
     // Redux Hooks --------------------------------------
-    // const patient = useAppSelector(state => state.therapy['patient']);
+    const patient = useAppSelector(state => state.therapy['patient']);
 	const dispatch = useAppDispatch();
 
     // States
@@ -39,15 +39,17 @@ const Patient: React.FC <NavProps>= ({ PatientContainer }) => {
     // }, [dispatch, doctorStatus]);
 
     useEffect(() => {
-    if(PatientContainer) dispatch(fetchPatient());
-	}, [PatientContainer, dispatch]);
+    if(doctorStatus === true) dispatch(fetchPatient());
+	}, [doctorStatus, dispatch]);
 
     console.log("doctorStatus = ", doctorStatus);
-    // if(doctorStatus){
+    // console.log("patient = ", patient);
+    if(doctorStatus === true){
+        console.log("patient = ", patient);
         
-    //     console.log("doctorStatus googleId = ", doctorStatus.googleId);
+        // console.log("doctorStatus googleId = ", doctorStatus.googleId);
 
-    // }
+    }
     
 
     // const changePatient = () => {

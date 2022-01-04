@@ -21,7 +21,8 @@ export const LoginOauth = () => async(dispatch: ThunkDispatch<{}, {}, AnyAction>
 }
 
 export const fetchPatient = () => async(dispatch: ThunkDispatch<{},{}, AnyAction>) => {
-    console.log("Fetch User action");
+    console.log("FETCH_PATIENT action");
     const response = await axios.get('/api/patients');
+    console.log("FETCH_PATIENT action - After Await");
     dispatch({type: FETCH_PATIENT, payload: response.data});
 }

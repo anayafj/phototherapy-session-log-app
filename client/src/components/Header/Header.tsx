@@ -3,7 +3,7 @@ import classnames  from 'classnames';
 import { useState, useEffect} from 'react';
 import { Link, useNavigate} from 'react-router-dom';
 
-import { useAppSelector } from '../../hooks';
+import { useAppSelector} from '../../hooks';
 import Navigation from './Navigation';
 import Patient from './Patient';
 
@@ -17,6 +17,7 @@ type ButtonText = LoginButtonText;
 type ButtonIcon = LoginButtonIconText;
 type ButtonPath = LoginButtonPaths | string;
 
+
 const Header = () => {
     const currentLocationPath: string = window.location.pathname;
 
@@ -25,6 +26,7 @@ const Header = () => {
     
     /// Redux Hooks --------------------------------------
     const auth = useAppSelector(state => state.therapy['auth']);
+    console.log('auth = ',auth);
     
     // States
     const [loginStatus, setLoginStatus] = useState<boolean | null>(null);
@@ -38,7 +40,7 @@ const Header = () => {
     // React Hooks -----------------------------
     useEffect(() => {
         setLoginStatus(auth.authenticated ? true : false)
-    }, [auth]);
+    }, [auth.authenticated]);
 
     useEffect(() => {        
 		if(loginStatus && currentLocationPath === "/"){
@@ -49,7 +51,6 @@ const Header = () => {
 	},[loginStatus, currentLocationPath, navigate]);
 
     // Styles ------------------------------>
-
      let toggleButton:string = classnames(
         'ui small button',
         `${styles.loginBtn}`,
@@ -63,6 +64,14 @@ const Header = () => {
         `${loginStatus ? styles.onLogin : ''}`,
     );
 
+    const renderPatientBar = () => {
+        if(loginStatus === true){
+            return <Patient PatientContainer={loginStatus} />;
+        } else {
+            return <div className={styles.defaultBar}></div>; 
+        }
+    }
+
 	return (
         <header className={styles.header}>
             <div className={styles.topContainer}>
@@ -75,7 +84,8 @@ const Header = () => {
                     <Navigation ContainerClass={`${loginStatus ? '' : 'hide'}`}/>
                 </div>
             </div>
-            <Patient PatientContainer={loginStatus} />
+            {renderPatientBar()}
+            {/* <Patient PatientContainer={loginStatus} /> */}
          </header>
 	);
 }
