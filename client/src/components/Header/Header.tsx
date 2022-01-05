@@ -26,7 +26,7 @@ const Header = () => {
     
     /// Redux Hooks --------------------------------------
     const auth = useAppSelector(state => state.therapy['auth']);
-    console.log('auth = ',auth);
+    // console.log('auth = ',auth);
     
     // States
     const [loginStatus, setLoginStatus] = useState<boolean | null>(null);
@@ -85,7 +85,6 @@ const Header = () => {
                 </div>
             </div>
             {renderPatientBar()}
-            {/* <Patient PatientContainer={loginStatus} /> */}
          </header>
 	);
 }

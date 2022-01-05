@@ -12,4 +12,7 @@ export interface PatientState {
         first: string,
         last: string,
     } | null,
+    created: Date | null,
+    updated: { date: Date, user: Object} | null,
+    users: object | null,
 }

@@ -3,6 +3,9 @@ import { AnyAction } from 'redux';
 
 const initialState: PatientState = {
     name : null,
+    created: null,
+    updated: null,
+    users : null,
 };
 
 export const patientReducer = (state = initialState, action: AnyAction) => {
