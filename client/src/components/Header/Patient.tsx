@@ -73,6 +73,10 @@ const Patient: React.FC <NavProps>= ({ PatientContainer }) => {
         e.preventDefault();
     }
 
+    const cancelNewPatient = () => {
+        console.log("cancelNewPatient callback");
+    }
+
     // const handleSubmit = (e: MouseEvent | React.FormEvent) => {
     //     console.log("handleSubmit -- newPatient = ",newPatient);
     //     e.preventDefault();
@@ -140,7 +144,7 @@ const Patient: React.FC <NavProps>= ({ PatientContainer }) => {
                         New Patient
                     </Link>
                     {/* {addNewPatientForm()} */}
-                    <NewPatient />
+                    <NewPatient cancelNewPatient={cancelNewPatient}/>
                 </div>	
             );
         } else {
