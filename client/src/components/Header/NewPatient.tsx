@@ -3,7 +3,8 @@ import classnames  from 'classnames';
 import React, { useState, useEffect } from 'react';
 
 interface NewPatientProps {
-    cancelNewPatient: any
+    cancelNewPatient: any,
+    // patientStatus: boolean,
 }
 
 interface AddNewPatient {
@@ -113,7 +114,8 @@ const NewPatient: React.FC <NewPatientProps> = ({cancelNewPatient}) => {
 
     const addNewPatientForm = () => {
         return (
-            <form className='ui form' onSubmit={(e) => handleSubmit(e)}>
+            <form className={`ui form ${styles.form}`} onSubmit={(e) => handleSubmit(e)}>
+            <header>Add New Patient</header>
         <label>
         <h1>First Name:</h1>
         <div className="ui mini input">

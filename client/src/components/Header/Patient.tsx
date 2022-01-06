@@ -38,12 +38,13 @@ const Patient: React.FC <NavProps>= ({ PatientContainer }) => {
     
     // States
     const [doctorStatus, setDoctorStatus] = useState<boolean | null>(null);
+    const [showNewPatientForm, setShowNewPatientForm] = useState<boolean>(false); //##** ------- Set Start State ------------!!!!!!
     // const [newPatient, setNewPatient] = useState<NewPatient>(initialState);
     
     let patientName: string = patient.name ? patient.name.first+" "+patient.name.last : "";
     let multiPatients: boolean = true;
 
-    // console.log(" patient = ", patient);
+    console.log(" patient = ", patient);
 
     // Hooks ------------------------------>>
     useEffect(() => {
@@ -51,7 +52,7 @@ const Patient: React.FC <NavProps>= ({ PatientContainer }) => {
     }, [PatientContainer]);
 
     useEffect(() => {
-    if(doctorStatus === true) dispatch(fetchPatient());
+        if(doctorStatus === true) dispatch(fetchPatient());
 	}, [doctorStatus, dispatch]);
 
 
@@ -71,90 +72,57 @@ const Patient: React.FC <NavProps>= ({ PatientContainer }) => {
     const handleNewPatientButton = (e: MouseEvent | React.MouseEvent) => {
         console.log("ADD New patient BTN HIT!!!");
         e.preventDefault();
+        setShowNewPatientForm(true);
     }
 
     const cancelNewPatient = () => {
         console.log("cancelNewPatient callback");
+        setShowNewPatientForm(false);
     }
-
-    // const handleSubmit = (e: MouseEvent | React.FormEvent) => {
-    //     console.log("handleSubmit -- newPatient = ",newPatient);
-    //     e.preventDefault();
-    // }
-
-    // const handleChangeFirstName = (value: string) => {
-    //     console.log("handleChangeFirstName -- value = ",value);
-
-    //     setNewPatient({...newPatient, name:{first: value, last: newPatient.name.last}});
-    //     console.log("handleChangeFirstName -- newPatient = ",newPatient);
-    // }
-
-    // const handleChangeLastName = (value: string) => {
-    //     console.log("handleChangeLastName -- value = ",value);
-
-    //     setNewPatient({...newPatient, name:{first: newPatient.name.first, last: value}});
-    //     console.log("handleChangeLastName -- newPatient = ",newPatient);
-    // }
-
-    
 
     // Styles ------------------------------>
     let addPatientButton: string = classnames (
-        styles.addPatientBtn, 'ui basic button mini'
+        styles.addPatientBtn, 'ui basic button mini', `${ showNewPatientForm ? 'hide': '' }`,
     );  
         
     let changePatientButton: string = classnames (
         'circular ui icon basic button mini', styles.changePatientBtn
     );
 
-    // const addNewPatientForm = () => {
-    //     return (
-    //         <form onSubmit={(e) => handleSubmit(e)}>
-    //     <label>
-    //       First Name:
-    //       <input type="text" value={newPatient.name.first} onChange={(e) => handleChangeFirstName(e.target.value)} />
-    //     </label>
-    //     <label>
-    //       Last Name:
-    //       <input type="text" value={newPatient.name.last} onChange={(e) => handleChangeLastName(e.target.value)} />
-    //     </label>
-    //     <input type="submit" value="Submit" />
-    //   </form>
-    //     );
-    // }
-
     // Render helper --------------------
     const renderPatientBar = () => {
         if(doctorStatus){
             return (
-                <div className={styles.patientBar}>
-                    <h2>{patientName}</h2>
+                <div className={ styles.patientBar }>
+                    <h2 className={`${patient.name ? '' : 'hide'}`}>{ patientName }</h2>
                     <Link
                         to='/patient/change'
-                        className={`${multiPatients ? changePatientButton: 'hide'}`}
+                        className={`${ multiPatients ? changePatientButton: 'hide' }`}
                     >
                         <i className="users icon"></i>
                     </Link>
                     <Link
                         to='/patient/create-new'
-                        className={addPatientButton}
+                        className={ addPatientButton }
                         onClick={(e) => handleNewPatientButton(e)}
                     >
                         <i className="icon user"></i>
                         New Patient
                     </Link>
                     {/* {addNewPatientForm()} */}
-                    <NewPatient cancelNewPatient={cancelNewPatient}/>
+                    <div className={`${ showNewPatientForm ? '': 'hide' }`}>
+                        <NewPatient cancelNewPatient={ cancelNewPatient }/>
+                    </div>
                 </div>	
             );
         } else {
-            return <div className={styles.defaultBar}></div>;
+            return <div className={ styles.defaultBar }></div>;
         } 
     }
 
     return (
         <Fragment>
-            {renderPatientBar()}
+            { renderPatientBar() }
         </Fragment>
     );
 }
