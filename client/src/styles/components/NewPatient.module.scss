@@ -7,6 +7,11 @@
 		margin-left: 20px;
 	}
 
+	label {
+		display: flex;
+		align-items: center;
+	}
+
 	header {
 		display: inline-flex;
 		font-size: 1.1rem;
@@ -27,6 +32,16 @@
 
 	h1:last-of-type {
 		margin-left: 15px;
+	}
+
+	.inputContainer {
+		display: inline-block;
+		width: 16rem;
+	}
+
+	span {
+		display: block;
+		margin-top: 1px !important;
 	}
 
 	button {

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux';
-import { FETCH_USER, FETCH_PATIENT, LOGIN_USER, LOGOUT_USER } from './types';
+import { FETCH_USER, ADD_PATIENT, FETCH_PATIENT, LOGIN_USER, LOGOUT_USER } from './types';
 
 export const fetchUser = () => async(dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     // console.log("Fetch User action");
@@ -25,4 +25,11 @@ export const fetchPatient = () => async(dispatch: ThunkDispatch<{},{}, AnyAction
     const response = await axios.get('/api/patient');
     console.log("FETCH_PATIENT action - After Await");
     dispatch({type: FETCH_PATIENT, payload: response.data});
+}
+
+export const addPatient = (name: object) => async(dispatch: ThunkDispatch<{},{}, AnyAction>) => {
+    console.log("ADD_PATIENT action", name);
+    const response = await axios.post('/api/patient');
+    console.log("ADD_PATIENT action - After Await");
+    dispatch({type: ADD_PATIENT, payload: response.data});
 }

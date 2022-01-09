@@ -15,10 +15,10 @@ router.get('/patient', async (req, res) => {
 // 	res.send(patient);
 // });
 
-// router.post('/patients', async (req, res) => {
-// 	const newPatient = req.body;
-// 	console.log('Post new patient = ', newPatient);
-// 	// res.send(patients);
-// });
+router.post('/patient', async (req, res) => {
+	const newPatient = req.data;
+	console.log('Post new patient = ', newPatient);
+	// res.send(patients);
+});
 
 module.exports = router;
