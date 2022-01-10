@@ -16,9 +16,18 @@ router.get('/patient', async (req, res) => {
 // });
 
 router.post('/patient', async (req, res) => {
-	const newPatient = req.data;
-	console.log('Post new patient = ', newPatient);
-	// res.send(patients);
+	const { name } = req.body;
+	const { _id } = req.user;
+
+	let newPatientObj = {
+		name,
+		updated: { date: Date.now(), user: _id },
+		users: [_id],
+	};
+
+	const addNewPatient = new Patient(newPatientObj);
+	await addNewPatient.save();
+	res.send(addNewPatient);
 });
 
 module.exports = router;

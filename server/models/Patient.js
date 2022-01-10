@@ -9,8 +9,8 @@ const patientSchema = new Schema({
 		last: String,
 	},
 	created: { type: Date, default: Date.now },
-	updated: { type: Date, default: Date.now, user: Number },
-	users: User,
+	updated: { date: Date, user: mongoose.ObjectId },
+	users: [mongoose.ObjectId],
 });
 
 const Patient = mongoose.model('patient', patientSchema);

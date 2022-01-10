@@ -28,8 +28,8 @@ export const fetchPatient = () => async(dispatch: ThunkDispatch<{},{}, AnyAction
 }
 
 export const addPatient = (name: object) => async(dispatch: ThunkDispatch<{},{}, AnyAction>) => {
-    console.log("ADD_PATIENT action", name);
-    const response = await axios.post('/api/patient');
+    console.log("ADD_PATIENT action");
+    const response = await axios.post('/api/patient', name);
     console.log("ADD_PATIENT action - After Await");
     dispatch({type: ADD_PATIENT, payload: response.data});
 }
