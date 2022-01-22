@@ -9,11 +9,12 @@ export interface AuthenticationState {
 }
 
 export interface PatientState {
+    _id: string,
     name: {
         first: string,
         last: string,
     } | null,
     created: Date | null,
-    updated: { date: Date, user: Object} | null,
+    updated: { date: Date, user: string} | null,
     users: object | null,
 }

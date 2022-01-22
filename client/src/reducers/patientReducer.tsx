@@ -2,6 +2,7 @@ import {PatientState, FETCH_PATIENT, ADD_PATIENT } from '../actions/types';
 import { AnyAction } from 'redux';
 
 const initialState: PatientState = {
+    _id : '',
     name : null,
     created: null,
     updated: null,
@@ -9,8 +10,8 @@ const initialState: PatientState = {
 };
 
 export const patientReducer = (state = initialState, action: AnyAction) => {
-    console.log("patientReducer - state : ",state);
-    console.log("patientReducer - action : ",action);
+    // console.log("patientReducer - state : ",state);
+    // console.log("patientReducer - action : ",action);
     switch (action.type){
         case FETCH_PATIENT:
         return action.payload || false;

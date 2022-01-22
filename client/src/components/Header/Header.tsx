@@ -26,7 +26,6 @@ const Header = () => {
     
     /// Redux Hooks --------------------------------------
     const auth = useAppSelector(state => state.therapy['auth']);
-    // console.log('auth = ',auth);
     
     // States
     const [loginStatus, setLoginStatus] = useState<boolean | null>(null);
@@ -36,6 +35,8 @@ const Header = () => {
     let loginButtonIcon:ButtonIcon = loginStatus ? LoginButtonIconText.IN: LoginButtonIconText.OUT;
     
     const loginButtonClickPath: ButtonPath = loginStatus ? LoginButtonPaths.IN : LoginButtonPaths.OUT;
+
+    // console.log("auth.authenticated = ", auth.authenticated);
 
     // React Hooks -----------------------------
     useEffect(() => {
@@ -66,7 +67,9 @@ const Header = () => {
 
     const renderPatientBar = () => {
         if(loginStatus === true){
-            return <Patient PatientContainer={loginStatus} />;
+            // console.log('auth = ',auth.authenticated._id);
+            // const doctor: string =  auth.authenticated._id;
+            return <Patient PatientContainer={auth.authenticated._id} />;
         } else {
             return <div className={styles.defaultBar}></div>; 
         }

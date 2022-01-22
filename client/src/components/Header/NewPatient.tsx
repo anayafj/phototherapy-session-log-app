@@ -46,14 +46,14 @@ const NewPatient: React.FC <NewPatientProps> = ({cancelNewPatient}) => {
     const [formValidation, setFormValidation] = useState<PatientFormValidation>(formInitialState);
 
     const checkForValidation = () => {
-        console.log('checking for validation...');
-        console.log('newPatient.name.first.length = ',newPatient.name.first.length);
-        console.log('newPatient.name.last.length = ',newPatient.name.last.length);
+        // console.log('checking for validation...');
+        // console.log('newPatient.name.first.length = ',newPatient.name.first.length);
+        // console.log('newPatient.name.last.length = ',newPatient.name.last.length);
         const validFirstName = newPatient.name.first.length > 2 ? true : false;
         const validLastName = newPatient.name.last.length > 2 ? true : false;
 
         if(validFirstName && validLastName){
-            console.log('Form valid!');
+            // console.log('Form valid!');
             setFormValidation({...formValidation, formError: false, formValid: true, firstNameValid: validFirstName, lastNameValid: validLastName});
         } else {
             setFormValidation({...formValidation, formError: true, formValid: false, firstNameValid: validFirstName, lastNameValid: validLastName});
@@ -61,21 +61,17 @@ const NewPatient: React.FC <NewPatientProps> = ({cancelNewPatient}) => {
 
     }
 
-    // useEffect(() => {
-    //     if(doctorStatus === true) dispatch(fetchPatient());
-	// }, [doctorStatus, dispatch]);
-
     // On Valid Form send -------------------------------------
     const handleSubmit = (e: MouseEvent | React.FormEvent) => {
-        console.log("handleSubmit -- newPatient = ",newPatient);
+        // console.log("handleSubmit -- newPatient = ",newPatient);
         e.preventDefault();
-        console.log("Submit Name - newPatient = ",newPatient);
+        // console.log("Submit Name - newPatient = ",newPatient);
         dispatch(addPatient(newPatient));
     }
 
     // Cancel Form
     const cancelPatientButton = (e: MouseEvent | React.MouseEvent) => {
-        console.log("cancelPatientButton");
+        // console.log("cancelPatientButton");
         e.preventDefault();
         cancelNewPatient();
     }

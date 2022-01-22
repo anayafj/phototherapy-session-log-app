@@ -4,8 +4,9 @@ const Patient = require('../models/Patient');
 const router = express.Router();
 
 router.get('/patient', async (req, res) => {
+	// console.log('patient routes - get patients');
 	const patient = await Patient.find();
-	console.log('patient routes - after await  -  patients= ', patient);
+	// console.log('patient routes - after await  -  patients = ', patient);
 	res.send(patient);
 });
 
